@@ -5,7 +5,7 @@
 
 ### Backend repo link :blush:
 ```
-https://github.com/iamhasibulhasan/backend_laravel_ecomerce
+https://github.com/iamhasibulhasan/backend__reactjs_ecommerce
 ```
 
 ### All rights reserved by [Hasibul Hasan](https://hasibul-hasan.netlify.app/)
