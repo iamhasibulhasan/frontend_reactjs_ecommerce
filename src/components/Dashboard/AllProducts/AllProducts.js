@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 import AuthUser from '../../Axios/AuthUser';
 import './AllProducts.css';
 
@@ -13,7 +14,7 @@ const AllProducts = () => {
             .then(res => {
                 setProducts(res.data);
             })
-    }, []);
+    }, [products]);
 
     const handleEdit = (e, id) => {
         e.preventDefault();
@@ -26,10 +27,36 @@ const AllProducts = () => {
 
     const handleDelete = (e, id) => {
         e.preventDefault();
-        http.post('/destroy/' + id)
-            .then(res => {
-                console.log(res.data);
-            })
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                http.post('/destroy/' + id)
+                    .then(res => {
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: res.data,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                })
+
+              }
+          })
+
+
+
+
+
     }
 
     return (
