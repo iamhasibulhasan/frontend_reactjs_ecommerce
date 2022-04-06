@@ -1,0 +1,40 @@
+.sidebar {
+    background-color: rgb(74, 68, 68);
+    height: 100vh;
+    padding: 10px;
+}
+
+.sidebar ul a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+    font-size: 20px;
+}
+
+.sidebar ul {
+    padding: 0;
+}
+
+.sidebar ul li {
+    list-style: none;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.active {
+
+    background-color: rgba(137, 137, 237, 0.672);
+}
+
+.main-content {
+    background-color: #ccc;
+    margin: 10px 0 0 10px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 82%;
+}
+
+.main-content .welcome {
+    text-align: end;
+}
