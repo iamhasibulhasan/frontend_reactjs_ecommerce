@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Register.css';
 import { useForm } from "react-hook-form";
-import { Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import AuthUser from './../Axios/AuthUser';
 
@@ -15,15 +14,15 @@ const Register = () => {
 
         http.post('/register', { name: data['name'], email: data['email'], password: data['password'] })
             .then((res) => {
-                history.push("/login");
+                history.push("/");
             })
 
 
         reset();
     }
+
     if (token) {
         history.push("/");
-        window.location.reload(false);
     }
 
 

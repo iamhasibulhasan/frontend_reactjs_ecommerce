@@ -9,6 +9,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header/Header';
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
+import Dashboard from './components/Dashboard/Dashboard/Dashboard';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 
 function App() {
@@ -28,6 +30,9 @@ function App() {
         <Route path='/login'>
           <Login></Login>
         </Route>
+        <PrivateRoute path='/dashboard'>
+          <Dashboard></Dashboard>
+        </PrivateRoute>
 
 
 

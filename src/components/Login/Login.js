@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import './Login.css';
 import AuthUser from '../Axios/AuthUser';
-import { useHistory, Redirect } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 const Login = () => {
     const { token } = AuthUser();
-    const history = useHistory();
     const { http, setToken } = AuthUser();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const history = useHistory();
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -19,12 +19,13 @@ const Login = () => {
             })
 
 
-
     };
+
+
     if (token) {
-        history.push("/");
-        window.location.reload(false);
+        history.push('/');
     }
+
 
 
 
