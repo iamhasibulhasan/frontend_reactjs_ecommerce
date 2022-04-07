@@ -33,7 +33,7 @@ const Home = () => {
                             <Card.Text>
                                 Price : $ {p.price}
                             </Card.Text>
-                            <Link to='/' className='btn btn-warning btn-sm'>Buy Now</Link>
+                            <Link to={`/product/${p.id}`} className='btn btn-warning btn-sm'>Buy Now</Link>
                         </Card.Body>
                     </Card>)
                 }

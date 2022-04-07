@@ -11,6 +11,7 @@ import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import Dashboard from './components/Dashboard/Dashboard/Dashboard';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import ProductDetails from './components/ProductDetails/ProductDetails';
 
 
 function App() {
@@ -33,6 +34,9 @@ function App() {
         <PrivateRoute path='/dashboard'>
           <Dashboard></Dashboard>
         </PrivateRoute>
+        <Route path='/product/:id'>
+          <ProductDetails></ProductDetails>
+        </Route>
 
 
 
