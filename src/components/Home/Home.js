@@ -16,11 +16,11 @@ const Home = () => {
             })
     }, [setProducts]);
 
-    console.log(products);
+
 
     return (
-        <Container>
-            <h2 className='mt-5'>First 10 dishes are here</h2>
+        <Container className='mt-5'>
+            <span>Total dishes: <strong>{products.length}</strong> showing first <strong>10</strong> dishes</span>
 
             <div className="products">
 

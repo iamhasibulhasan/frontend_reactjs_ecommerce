@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { Button, Modal } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import AuthUser from '../../Axios/AuthUser';
 import './AllProducts.css';
@@ -8,6 +9,16 @@ import './AllProducts.css';
 const AllProducts = () => {
     const { http } = AuthUser();
     const [products, setProducts] = useState([]);
+    const [show, setShow] = useState(false);
+
+
+    const [id, setId] = useState('');
+    const [pName, setPName] = useState('');
+    const [pPrice, setPPrice] = useState('');
+    const [url, setUrl] = useState('');
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
 
     useEffect(() => {
@@ -15,14 +26,20 @@ const AllProducts = () => {
             .then(res => {
                 setProducts(res.data);
             })
-    }, [setProducts]);
+    }, [products]);
 
 
     const handleEdit = (e, p) => {
         e.preventDefault();
 
 
+        setId(p.id);
+        setPName(p.name);
+        setPPrice(p.price);
+        setUrl(p.img);
 
+
+        handleShow();
 
     }
 
@@ -56,15 +73,38 @@ const AllProducts = () => {
           })
 
 
-
-
-
     }
+    const handleChangeName = (e) => {
+        setPName(e.target.value);
+    }
+    const handleChangePrice = (e) => {
+        setPPrice(e.target.value);
+    }
+    const handleChangeUrl = (e) => {
+        setUrl(e.target.value);
+    }
+    const handleUpdate = (e) => {
+        e.preventDefault();
 
+        http.post('/update', { id: id, name: pName, price: pPrice, img: url })
+            .then((res) => {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: res.data,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+
+
+            })
+    }
     return (
+        <>
         <div>
             <h4>All Products</h4>
-            <table className='table'>
+                <table className='table table-hover'>
                 <thead>
                     <tr>
                         <th>#SI</th>
@@ -96,6 +136,42 @@ const AllProducts = () => {
 
 
         </div>
+
+            <Modal show={show} onHide={handleClose} centered size='md'>
+                <form onSubmit={handleUpdate}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Edit Product</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className="edit-modal">
+                            <h6>Product Name</h6>
+                            <input onChange={handleChangeName} type="text" placeholder='Name' className='mb-4 form-control' value={pName} />
+                        </div>
+                        <div className="edit-modal">
+                            <h6>Product Price</h6>
+                            <input onChange={handleChangePrice} type="text" placeholder='Price' className='mb-4 form-control' value={pPrice} />
+                        </div>
+                        <div className="edit-modal">
+                            <h6>Image Url</h6>
+                            <input onChange={handleChangeUrl} type="text" placeholder='Image url' className='mb-4 form-control' value={url} />
+                        </div>
+                        <img width='50%' src={url} alt="" />
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button type='submit' variant="primary" onClick={handleClose}>
+                            Save Changes
+                        </Button>
+                    </Modal.Footer>
+                </form>
+            </Modal>
+
+
+
+        </>
     );
 };
 
