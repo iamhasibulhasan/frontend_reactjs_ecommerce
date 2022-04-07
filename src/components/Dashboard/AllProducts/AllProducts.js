@@ -9,19 +9,21 @@ const AllProducts = () => {
     const { http } = AuthUser();
     const [products, setProducts] = useState([]);
 
+
     useEffect(() => {
         http.get('/all-product')
             .then(res => {
                 setProducts(res.data);
             })
-    }, [products]);
+    }, [setProducts]);
 
-    const handleEdit = (e, id) => {
+
+    const handleEdit = (e, p) => {
         e.preventDefault();
-        http.post('/edit')
-            .then(res => {
-                console.log(res.data);
-            })
+
+
+
+
     }
 
 
@@ -84,15 +86,18 @@ const AllProducts = () => {
                                 <img width='50' src={p.img} alt="" />
                             </td>
                             <td>
-                                <a onClick={(e) => handleEdit(e, `${p.id}`)} href="#0" className='btn btn-warning btn-sm'>Edit</a>&nbsp;
+                                <a onClick={(e) => handleEdit(e, p)} href="#0" className='btn btn-warning btn-sm'>Edit</a>&nbsp;
                                 <a onClick={(e) => handleDelete(e, `${p.id}`)} href="#0" className='btn btn-danger btn-sm'>Delete</a>
                             </td>
                         </tr>)
                     }
                 </tbody>
             </table>
+
+
         </div>
     );
 };
 
 export default AllProducts;
+

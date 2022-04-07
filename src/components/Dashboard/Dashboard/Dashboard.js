@@ -15,12 +15,6 @@ const Dashboard = () => {
         setActive(active);
     }
 
-    useEffect(() => {
-        http.post('/me')
-            .then(res => {
-                setUserDetails(res.data);
-            })
-    }, []);
 
 
     return (
@@ -37,7 +31,7 @@ const Dashboard = () => {
                     </ul>
                 </div>
                 <div className="col-lg-10 main-content">
-                    <h4 className='welcome'>Welcome {userDetails.name} !!</h4>
+                    <h4 className='welcome'>Welcome {user.name} !!</h4>
                     {
                         active === 'add' ? <AddProduct></AddProduct> :
                             <AllProducts></AllProducts>
