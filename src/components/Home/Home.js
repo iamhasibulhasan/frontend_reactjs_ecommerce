@@ -26,7 +26,9 @@ const Home = () => {
 
 
                 {
-                    products.slice(0, 10).map(p => <Card style={{ width: '18rem' }}>
+                    products.slice(0, 10).map(p => <Card
+                        key={p.id}
+                        style={{ width: '18rem' }}>
                         <Card.Img variant="top" src={p.img} />
                         <Card.Body className='text-center'>
                             <Card.Title>{p.name}</Card.Title>

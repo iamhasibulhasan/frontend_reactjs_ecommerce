@@ -5,7 +5,8 @@ import AuthUser from '../Axios/AuthUser';
 import './Header.css';
 
 const Header = () => {
-    const { token, logout, user } = AuthUser();
+    let type;
+    const { token, logout, user = '0' } = AuthUser();
     // console.log(user);
 
     const logoutUser = () => {
@@ -13,6 +14,12 @@ const Header = () => {
             logout();
         }
     }
+
+    if (user.type) {
+        type = user.type;
+    }
+    console.log(type);
+
 
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
@@ -24,8 +31,17 @@ const Header = () => {
                         <Nav.Link as={Link} to="/">Home</Nav.Link>
 
                         {
-                            token ? <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link> : <Nav.Link as={Link} to="/register">Register</Nav.Link>
+                            type == 0 ? <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link> :
+                                type == 1 ? <Nav.Link as={Link} to="/profile">Profile</Nav.Link> :
+                                    <Nav.Link as={Link} to="/register">Register</Nav.Link>
                         }
+                        {
+
+                        }
+
+
+
+
                         {
                             token ? <Nav.Link as={Link} onClick={logoutUser} to="/login">Logout</Nav.Link> :
                                 <Nav.Link as={Link} to="/login">Login</Nav.Link>
