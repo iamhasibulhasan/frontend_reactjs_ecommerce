@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
-import { Card, Container } from 'react-bootstrap';
+import { Card, Container, Alert, Row } from 'react-bootstrap';
 import AuthUser from './../Axios/AuthUser';
 import { Link } from 'react-router-dom';
 
@@ -20,6 +20,28 @@ const Home = () => {
 
     return (
         <Container className='mt-5'>
+            <Alert variant="success">
+                <div className="row">
+                    <div className="col-lg-6">
+                        <Alert.Heading>Admin Credentials</Alert.Heading>
+                        <pre>
+                            Email: admin@gmail.com
+                        </pre>
+                        <pre>
+                            Password: asdfghjkl
+                        </pre>
+                    </div>
+                    <div className="col-lg-6">
+                        <Alert.Heading>User Credentials</Alert.Heading>
+                        <pre>
+                            Email: user@gmail.com
+                        </pre>
+                        <pre>
+                            Password: asdfghjkl
+                        </pre>
+                    </div>
+                </div>
+            </Alert>
             <span>Total dishes: <strong>{products.length}</strong> showing first <strong>10</strong> dishes</span>
 
             <div className="products">
