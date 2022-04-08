@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import AuthUser from '../Axios/AuthUser';
@@ -6,8 +6,18 @@ import './Header.css';
 
 const Header = () => {
     let type;
-    const { token, logout, user = '0' } = AuthUser();
-    // console.log(user);
+    const { http, token, logout } = AuthUser();
+    const [user, setUser] = useState([]);
+
+    useEffect(() => {
+        http.post('/me')
+            .then(res => {
+                setUser(res.data);
+            })
+    }, []);
+
+
+
 
     const logoutUser = () => {
         if (token !== undefined) {
@@ -15,10 +25,7 @@ const Header = () => {
         }
     }
 
-    if (user.type) {
-        type = user.type;
-    }
-    console.log(type);
+
 
 
     return (
@@ -31,8 +38,8 @@ const Header = () => {
                         <Nav.Link as={Link} to="/">Home</Nav.Link>
 
                         {
-                            type == 0 ? <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link> :
-                                type == 1 ? <Nav.Link as={Link} to="/profile">Profile</Nav.Link> :
+                            user.type == 0 ? <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link> :
+                                user.type == 1 ? <Nav.Link as={Link} to="/profile">Profile</Nav.Link> :
                                     <Nav.Link as={Link} to="/register">Register</Nav.Link>
                         }
                         {

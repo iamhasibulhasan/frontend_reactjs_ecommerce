@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 const AuthUser = () => {
 
     const history = useHistory();
-    const guest = { type: 2 };
+
 
     const getToken = () => {
         const tokenString = sessionStorage.getItem('token');
@@ -33,7 +33,6 @@ const AuthUser = () => {
         getToken();
         window.location.reload(false);
         history.push("/");
-        sessionStorage.setItem('user', JSON.stringify(guest));
     }
 
     const saveToken = (user, token) => {
@@ -60,7 +59,7 @@ const AuthUser = () => {
         token,
         user,
         getToken,
-        logout
+        logout,
 
     }
 }

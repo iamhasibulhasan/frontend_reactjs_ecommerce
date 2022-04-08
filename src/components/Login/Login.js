@@ -38,7 +38,7 @@ const Login = () => {
                     <h3>Login here</h3>
                 </div>
                 <div className="card-body">
-                    <form onSubmit={(e) => handleLogin(e)}>
+                    <form onSubmit={handleLogin}>
                         <label htmlFor="" className='mb-2'>Email</label>
                         <input placeholder='Email' type="text" name="email" className='form-control mb-5' onChange={(e) => setEmail(e.target.value)} />
                         <label htmlFor="" className='mb-2'>Password</label>
