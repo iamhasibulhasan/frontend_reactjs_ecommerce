@@ -8,6 +8,17 @@ const Home = () => {
     const { http } = AuthUser();
     const [products, setProducts] = useState([]);
 
+    const handleSearch = (e) => {
+        e.preventDefault();
+        let search = e.target.value || 'all';
+
+
+        http.get('/searchProduct/' + search)
+            .then(res => {
+                setProducts(res.data);
+                console.log(res.data);
+            })
+    }
 
     useEffect(() => {
         http.get('/all-product')
@@ -42,7 +53,12 @@ const Home = () => {
                     </div>
                 </div>
             </Alert>
-            <span>Total dishes: <strong>{products.length}</strong> showing first <strong>10</strong> dishes</span>
+
+            <div className="search-div my-5">
+                <input onChange={handleSearch} type="text" className='form-control' placeholder='Search your dish...' />
+
+            </div>
+            <span>Found dishes: <strong>{products.length}</strong></span>
 
             <div className="products">
 
